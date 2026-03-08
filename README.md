@@ -1,118 +1,100 @@
-AI SRE Agent
+# AI SRE Agent (LangGraph)
 
-Autonomous Incident Investigation using LangGraph, MCP, and Amazon Bedrock
+## AI-Powered Incident Investigation Agent for SRE Workflows
 
-An AI-powered Site Reliability Engineering (SRE) agent that automatically investigates production incidents by correlating metrics, logs, and code changes.
+AI agent that investigates production incidents by analyzing **metrics, logs, and code changes**, then generates a structured **root cause analysis report**.
 
-Instead of manually debugging incidents across multiple tools, the agent performs the investigation workflow autonomously and produces a structured incident report.
+---
 
-Architecture
-User Chat Interface
-        │
-        ▼
-LangGraph Agent Orchestrator
-        │
-        ▼
-Planner (Decision Engine)
-        │
-        ▼
-MCP Tool Servers
- ├ Metrics Server → Prometheus-style metrics
- ├ Logs Server → AWS CloudWatch logs
- └ GitHub Server → Recent commits
-        │
-        ▼
-Amazon Bedrock LLM
-        │
-        ▼
-AI Root Cause Analysis
-        │
-        ▼
-Incident Report
-Problem
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![LangGraph](https://img.shields.io/badge/LangGraph-Agent%20Orchestration-green)
+![MCP](https://img.shields.io/badge/MCP-Tool%20Integration-purple)
+![Amazon Bedrock](https://img.shields.io/badge/Amazon%20Bedrock-LLM-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-Production incidents usually require engineers to manually investigate:
+---
 
-monitoring metrics
+## Overview
 
-application logs
+This project explores how **AI agents can automate incident investigation workflows** typically handled by Site Reliability Engineers.
 
-recent code deployments
+Instead of manually debugging incidents across multiple systems, the agent collects signals from observability systems, reasons across them using an LLM, and generates a structured incident report.
 
-infrastructure changes
+The system is built using **LangGraph**, which allows explicit control over multi-step reasoning workflows and shared agent state.
 
-This process is slow and requires context switching across multiple systems.
+---
 
-This project demonstrates how an AI agent can automate the entire investigation workflow.
+## Key Capabilities
 
-What the Agent Does
+- Automated **incident investigation workflows**
+- Analysis of **metrics, logs, and recent code changes**
+- Multi-step reasoning using **LangGraph state graphs**
+- Tool integrations using **Model Context Protocol (MCP)**
+- AI-assisted **root cause analysis**
+- Structured **incident reports with remediation suggestions**
 
-When an incident occurs the agent automatically:
+---
 
-Detects abnormal service latency from metrics
+## Example Investigation Workflow
 
-Checks recent error logs
 
-Inspects recent GitHub commits
-
-Correlates signals using an LLM
-
-Generates root cause analysis
-
-Produces a structured incident report
-
-Example Investigation Flow
 Latency spike detected
-        │
-        ▼
-Analyze metrics
-        │
-        ▼
-Check CloudWatch logs
-        │
-        ▼
-Inspect recent GitHub commits
-        │
-        ▼
+│
+▼
+Analyze service metrics
+│
+▼
+Inspect application logs
+│
+▼
+Check recent GitHub commits
+│
+▼
 LLM performs reasoning
-        │
-        ▼
+│
+▼
 Generate incident report
-Example Command
 
-Run the chat interface:
 
-python chat_interface.py
+The **planner node** decides which step should execute next based on the shared agent state.
 
-Then type:
+---
 
-investigate langchain-ai/langgraph
+## Architecture Flow
 
-The agent will automatically execute:
 
-metrics → logs → github → analysis → report
+User Chat Interface
+│
+▼
+LangGraph Agent Orchestrator
+│
+▼
+Planner (Decision Engine)
+│
+▼
+Tool Layer (MCP Servers)
+├ Metrics Server
+├ Logs Server
+└ GitHub Server
+│
+▼
+Amazon Bedrock LLM
+│
+▼
+Root Cause Analysis
+│
+▼
+Incident Report
 
-Example output:
 
-Incident Summary
-Service latency spike detected.
+This architecture separates **agent orchestration, tool integrations, and reasoning models**, making the system easier to extend.
 
-Observed Metrics
-Average latency: 0.80 seconds.
+---
 
-Relevant Logs
-ERROR timeout connecting to database.
+## Project Structure
 
-Recent Code Changes
-Commit: optimize graph execution.
 
-Root Cause
-Recent code change introduced a slow database query.
-
-Suggested Fix
-Optimize the query and introduce caching.
-Project Structure
-ai-sre-agent
+AI-SRE-agent
 │
 ├ agent
 │ ├ langgraph_agent.py
@@ -132,67 +114,72 @@ ai-sre-agent
 ├ chat_interface.py
 ├ requirements.txt
 └ README.md
-Tech Stack
-
-LangGraph
-Model Context Protocol (MCP)
-Amazon Bedrock
-Python
-GitHub API
-Prometheus-style metrics
-AWS CloudWatch logs
-
-Key Features
-
-Autonomous multi-tool AI agent orchestration
-
-LangGraph planner for investigation workflows
-
-MCP tool architecture for modular integrations
-
-LLM-powered root cause analysis
-
-Automated incident report generation
-
-Interactive chat interface for debugging
-
-Why This Project Matters
-
-Modern production systems generate massive amounts of telemetry data.
-
-AI agents can act as an intelligent layer that:
-
-investigates incidents automatically
-
-correlates multiple observability signals
-
-assists engineers during debugging
-
-This project demonstrates a prototype AI SRE assistant capable of automated incident investigation.
-
-Future Improvements
-
-Real-time incident triggers using CloudWatch alarms
-
-Slack notifications for incidents
-
-Grafana monitoring dashboards
-
-Vector search over logs
-
-Multi-service distributed investigation
 
 
-Run the Project
+The structure separates **agent logic, tool servers, and integrations** for easier extensibility.
 
-Install dependencies:
+---
+
+## Tech Stack
+
+- Python  
+- LangGraph  
+- Model Context Protocol (MCP)  
+- Amazon Bedrock  
+- GitHub API  
+- AWS CloudWatch  
+
+---
+
+## Quick Start
+
+### 1. Clone the repository
+
+
+git clone https://github.com/YOUR_USERNAME/AI-SRE-agent.git
+
+cd AI-SRE-agent
+
+
+### 2. Install dependencies
+
 
 pip install -r requirements.txt
 
-Start the agent:
+
+### 3. Run the agent
+
 
 python chat_interface.py
 
-Investigate a repository:
+
+### 4. Start an investigation
+
+Example query:
+
 
 investigate langchain-ai/langgraph
+
+
+The agent will automatically run the investigation workflow and generate an **incident report**.
+
+---
+
+## Future Improvements
+
+Planned enhancements include:
+
+- Real-time incident triggers using monitoring alerts  
+- Slack incident notifications  
+- Grafana dashboard integration  
+- Vector-based log retrieval  
+- Multi-service investigation across distributed systems  
+- Kubernetes observability support  
+
+---
+
+## Author
+
+**Sai Krishna Veginati**
+
+Machine Learning Engineer focused on **AI systems, agent orchestration, and production-scale ML infrastructure.**
